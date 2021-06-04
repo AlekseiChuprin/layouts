@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="sidebar.main">
+            <block class="Study\LayoutBlock\Block\HelloWorld" name="study_hello_world6" template="Study_LayoutBlock::hello-world6.phtml"/>
+        </referenceContainer>
+
+        <referenceContainer name="columns.top">
+            <block class="Study\LayoutBlock\Block\HelloWorld" name="study_hello_world7" template="Study_LayoutBlock::hello-world7.phtml" after="columns.top"/>
+        </referenceContainer>
+
+        <referenceBlock name="category.product.list.additional">
+            <block class="Study\LayoutBlock\Block\HelloWorld" name="study_hello_world8" template="Study_LayoutBlock::hello-world8.phtml" before="-"/>
+        </referenceBlock>
+
+    </body>
+</page>
