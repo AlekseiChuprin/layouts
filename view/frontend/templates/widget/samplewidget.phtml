@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var \Study\LayoutBlock\Block\Widget $block
+ */
+?>
+
+
+<?php if($block->getData('widget-title')): ?>
+    <h2 class='my-title'><?php echo $block->getData('widget-title'); ?></h2>
+<?php endif; ?>
+<?php if($block->getData('widget-content')): ?>
+    <h2 class='my-content'><?php echo $block->getData('widget-content'); ?></h2>
+<?php endif; ?>
