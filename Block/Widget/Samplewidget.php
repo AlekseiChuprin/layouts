@@ -13,5 +13,5 @@ use Magento\Widget\Block\BlockInterface;
  */
 class Samplewidget extends Template implements BlockInterface
 {
-    protected $_template = "widget/samplewidget.phtml";
+    protected $_template = "widget/sampleWidget.phtml";
 }

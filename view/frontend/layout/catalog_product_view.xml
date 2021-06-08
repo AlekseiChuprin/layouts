@@ -3,23 +3,23 @@
     <body>
         <referenceContainer name="product.info.price">
             <container name="myContainer" htmlTag="div" htmlClass="myDivContainer">
-                <block class="Study\LayoutBlock\Block\HelloWorld" name="study_hello_world1" template="Study_LayoutBlock::hello-world1.phtml"/>
+                <block class="Magento\Cms\Block\Block" name="custom-block">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">custom-block</argument>
+                    </arguments>
+                </block>
                 <block class="Study\LayoutBlock\Block\HelloWorld" name="study_hello_world2" template="Study_LayoutBlock::hello-world2.phtml"/>
             </container>
         </referenceContainer>
-
         <referenceContainer name="product.info.social">
             <block class="Study\LayoutBlock\Block\HelloWorld" name="study_hello_world3" template="Study_LayoutBlock::hello-world3.phtml"/>
         </referenceContainer>
-
         <referenceBlock name="study_hello_world3">
             <block class="Study\LayoutBlock\Block\HelloWorld" name="study_hello_world4" template="Study_LayoutBlock::hello-world4.phtml"/>
         </referenceBlock>
-
         <referenceBlock name="page.main.title">
             <block class="Study\LayoutBlock\Block\HelloWorld" name="study_hello_world5" template="Study_LayoutBlock::hello-world5.phtml"/>
         </referenceBlock>
-
         <referenceContainer name="header-wrapper" htmlTag="div" htmlClass="header content">
             <block class="Study\LayoutBlock\Block\HelloWorld" name="study_hello_world9" template="Study_LayoutBlock::hello-world9.phtml"/>
         </referenceContainer>

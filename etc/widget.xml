@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
-    <widget class="Study\LayoutBlock\Block\Widget\Samplewidget" id="study_customwidget_samplewidget">
+    <widget class="Study\LayoutBlock\Block\Widget\SampleWidget" id="study_custom_widget_sampleWidget">
         <label>My Widget</label>
         <description>My Widget</description>
         <parameters>
@@ -10,6 +10,32 @@
             <parameter name="widget-content" sort_order="20" visible="true" xsi:type="text">
                 <label>Content</label>
             </parameter>
+        </parameters>
+    </widget>
+    <widget class="Study\LayoutBlock\Block\Widget\PriceWidget" id="study_layout_block_price_widget">
+        <label>Price Widget</label>
+        <description>Price Widget</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true" sort_order="40">
+                <label translate="true">Product SKU</label>
+            </parameter>
+            <parameter name="use_special_price" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Use Special Price</label>
+            </parameter>
+            <parameter name="round_of_the_price" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Round Of The Price</label>
+            </parameter>
+            <parameter name="product_id" xsi:type="block" visible="true" required="true" sort_order="30">
+                <label translate="true">Product</label>
+                <block class="Magento\Catalog\Block\Adminhtml\Product\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Select Product...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
         </parameters>
     </widget>
 </widgets>

@@ -1,0 +1,26 @@
+<?php
+
+/** @var $block Study\LayoutBlock\Block\Widget\PriceWidget*/
+
+$product = $block->getProductInformation();
+
+$titleWidget = $block->getTitle();
+
+?>
+<h2 class="info"><?php echo __('Product Information');?></h2>
+<div class="widgetProducts">
+    <p><?php echo $titleWidget; ?></p>
+    <p class="blocktext"><?php echo __('Product Name - '); echo $product->getName();?></p>
+    <?php
+        if($block->getData('use_special_price')){
+         $productPrice = $product->getData('special_price');
+        }
+        if($block->getData('round_of_the_price')){
+            $productPrice = $product->getFormattedPrice();
+        }
+        else {
+            $productPrice = $product->getFormattedPrice();
+        }
+    ?>
+    <p class="blocktext"><?php echo __('Product Price - '); echo $productPrice ;?></p>
+</div>
