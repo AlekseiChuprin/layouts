@@ -16,7 +16,7 @@
         <label>Price Widget</label>
         <description>Price Widget</description>
         <parameters>
-            <parameter name="title" xsi:type="text" required="false" visible="true" sort_order="40">
+            <parameter name="title_sku_product" xsi:type="text" required="true" visible="true" sort_order="40">
                 <label translate="true">Product SKU</label>
             </parameter>
             <parameter name="use_special_price" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
@@ -25,17 +25,6 @@
             <parameter name="round_of_the_price" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
                 <label translate="true">Round Of The Price</label>
             </parameter>
-            <parameter name="product_id" xsi:type="block" visible="true" required="true" sort_order="30">
-                <label translate="true">Product</label>
-                <block class="Magento\Catalog\Block\Adminhtml\Product\Widget\Chooser">
-                    <data>
-                        <item name="button" xsi:type="array">
-                            <item name="open" xsi:type="string">Select Product...</item>
-                        </item>
-                    </data>
-                </block>
-            </parameter>
-
         </parameters>
     </widget>
 </widgets>

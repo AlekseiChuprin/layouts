@@ -11,8 +11,6 @@ use Magento\Catalog\Model\ProductFactory;
 use Magento\Framework\Data\Helper\PostHelper;
 use Magento\Framework\Url\Helper\Data;
 use Magento\Widget\Block\BlockInterface;
-use Magento\Catalog\Model\ResourceModel\Product;
-
 
 /**
  * Class PriceWidget
@@ -21,14 +19,9 @@ use Magento\Catalog\Model\ResourceModel\Product;
 class PriceWidget extends ListProduct implements BlockInterface
 {
     /**
-     * @var ProductFactory
+     * @var \Magento\Catalog\Model\ProductRepository
      */
-    protected $_productFactory;
-
-    /**
-     * @var Product
-     */
-    private $resourceModel;
+    protected $_productRepository;
 
     /**
      * PriceWidget constructor.
@@ -37,7 +30,7 @@ class PriceWidget extends ListProduct implements BlockInterface
      * @param Resolver $layerResolver
      * @param ProductFactory $productFactory
      * @param CategoryRepositoryInterface $categoryRepository
-     * @param Product $resourceModel
+     * @param \Magento\Catalog\Model\ProductRepository $productRepository
      * @param Data $urlHelper
      * @param array $data
      */
@@ -46,33 +39,50 @@ class PriceWidget extends ListProduct implements BlockInterface
                                 Resolver $layerResolver,
                                 ProductFactory $productFactory,
                                 CategoryRepositoryInterface $categoryRepository,
-                                \Magento\Catalog\Model\ResourceModel\Product $resourceModel,
+                                \Magento\Catalog\Model\ProductRepository $productRepository,
                                 Data $urlHelper, array $data = [])
 
     {
         $this->_productFactory = $productFactory;
-        parent::__construct($context, $postDataHelper, $layerResolver,
-            $categoryRepository, $urlHelper, $data);
-        $this->setTemplate("Study_LayoutBlock::widget/priceWidget.phtml");
-        $this->resourceModel = $resourceModel;
+        parent::__construct($context, $postDataHelper, $layerResolver, $categoryRepository, $urlHelper, $data);
+        $this->_productRepository = $productRepository;
     }
 
     /**
-     * @return \Magento\Catalog\Model\Product
+     * @param $sku
+     * @return \Magento\Catalog\Api\Data\ProductInterface|\Magento\Catalog\Model\Product
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getProductInformation()
+    public function getProductBySku($sku)
     {
-        $productId = $this->getProduct_id();
-        try {
-            if ($productId) {
-                $productId = str_replace('product/', '', $productId);
-            }
-            $product = $this->_productFactory->create();
-            $this->resourceModel->load($product, $productId);
-        } catch (\Exception $e) {
-            $this->messageManager->addErrorMessage(__('Error loading product'));
+        return $this->_productRepository->get($sku);
+    }
+
+    /**
+     * @return false|float|null
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function showProductPrice()
+    {
+        $sku = $this->getData('title_sku_product');
+        $product = $this->getProductBySku($sku);
+        $productPrice = $product->getPrice();
+        if($this->getData('use_special_price') && (!empty($product->getSpecialPrice()))){
+        $productPrice = $product->getSpecialPrice();
+        }
+        if($this->getData('round_of_the_price')){
+            $productPrice = ceil($productPrice);
         }
 
-        return $product;
+        return $productPrice;
+    }
+
+    /**
+     * @return false|float|null
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function toHtml()
+    {
+        return $this->showProductPrice();
     }
 }

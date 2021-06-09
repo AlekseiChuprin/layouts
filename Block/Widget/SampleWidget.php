@@ -8,10 +8,10 @@ use Magento\Framework\View\Element\Template;
 use Magento\Widget\Block\BlockInterface;
 
 /**
- * Class Samplewidget
+ * Class SampleWidget
  * @package Study\LayoutBlock\Block\Widget
  */
-class Samplewidget extends Template implements BlockInterface
+class SampleWidget extends Template implements BlockInterface
 {
-    protected $_template = "widget/sampleWidget.phtml";
+    protected $_template = "widget/sample-widget.phtml";
 }
